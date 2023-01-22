@@ -1,4 +1,5 @@
 import numpy
+import pyrosim.pyrosim as pyrosim
 
 class SENSOR:
     def __init__(self, linkName):
@@ -6,5 +7,7 @@ class SENSOR:
         self.values = numpy.zeros(1000)
 
     def Get_Value(self, i):
-        values[i] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
-        print(values)
+        self.values[i] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+        if i == len(self.values)-1:
+            print(self.values)
+            print(self.linkName)
