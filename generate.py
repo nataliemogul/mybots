@@ -7,12 +7,10 @@ x = 0
 y = 0
 z = 0.5
 
-# def Create_World():
-#     pyrosim.Start_SDF("world.sdf")
-#     pyrosim.Send_Cube(name="Box", pos=[x,y,z] , size=[length, width, height])
-#     pyrosim.End()
-
-# Create_World()
+def Create_World():
+    pyrosim.Start_SDF("world.sdf")
+    pyrosim.Send_Cube(name="Box", pos=[x,y,z] , size=[length, width, height])
+    pyrosim.End()
 
 def Create_Robot():
     pyrosim.Start_URDF("body.urdf")
@@ -30,8 +28,14 @@ def Generate_Brain():
     pyrosim.Send_Sensor_Neuron(name = 2 , linkName = "FrontLeg")
     pyrosim.Send_Motor_Neuron( name = 3 , jointName = 'Torso_BackLeg')
     pyrosim.Send_Motor_Neuron( name = 4 , jointName = "Torso_FrontLeg")
+    pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 3 , weight = 0.5 )
+    #pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 3 , weight = 1.5 )
+    pyrosim.Send_Synapse( sourceNeuronName = 0 , targetNeuronName = 4 , weight = 3.5 )
+    pyrosim.Send_Synapse( sourceNeuronName = 1 , targetNeuronName = 4 , weight = 5.0 )
+    #pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 3 , weight = 0.5 )
+    pyrosim.Send_Synapse( sourceNeuronName = 2 , targetNeuronName = 4 , weight = 1.0 )
     pyrosim.End()
 
-
+Create_World()
 Create_Robot()
 Generate_Brain()
