@@ -11,3 +11,7 @@ phaseOffset_back = 0
 targetAngles = numpy.linspace(0, 2*numpy.pi, 1000)
 targetAngles_front = amplitude_front/2 * numpy.sin(100 * targetAngles + phaseOffset_front)
 targetAngles_back = amplitude_back * numpy.sin(10 * targetAngles + phaseOffset_back)
+
+numberOfGenerations = 10
+
+sleep = 0.005

@@ -6,11 +6,16 @@ import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import numpy
 import time
+import constants
 
 
 class SIMULATION:
-    def __init__(self):
-        self.physicsClient = p.connect(p.GUI)
+    def __init__(self, directOrGUI):
+        self.runType = directOrGUI
+        if self.runType == "DIRECT":
+            self.physicsClient = p.connect(p.DIRECT)
+        else:
+            self.physicsClient = p.connect(p.GUI)
         self.world = WORLD()
         self.robot = ROBOT()
         p.setGravity(0,0,-9.8)
@@ -21,7 +26,9 @@ class SIMULATION:
             self.robot.Sense(i)
             self.robot.Think()
             self.robot.Act()
-            time.sleep(0.01)
+
+        if self.runType == "GUI":
+                time.sleep(constants.sleep)
 
     def __del__(self):
         p.disconnect()

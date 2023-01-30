@@ -8,6 +8,7 @@ import constants as c
 from simulation import SIMULATION
 from world import WORLD
 from robot import ROBOT
+import sys
 
 
 # physicsClient = p.connect(p.GUI)
@@ -42,6 +43,8 @@ from robot import ROBOT
 # numpy.save('data/frontLegSensorValues', frontLegSensorValues)
 # p.disconnect()
 
-simulation = SIMULATION()
+directOrGUI = sys.argv[1]
+
+simulation = SIMULATION(directOrGUI)
 simulation.Run()
 simulation.Get_Fitness()
