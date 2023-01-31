@@ -2,30 +2,45 @@ import numpy
 import os
 import pyrosim.pyrosim as pyrosim
 import random
+import time
 
 class SOLUTION:
-    def __init__(self):
+    def __init__(self, nextAvailableID):
         self.weights = numpy.random.rand(3,2)*2-1
+        self.myID = nextAvailableID
 
-    def Evaluate(self, directOrGUI):
-        self.Create_World()
+    def Start_Simulation(self, directOrGUI):
         self.Create_Robot()
         self.Generate_Brain()
-        os.system("python3 simulate.py " + directOrGUI)
+        systemCommand = "python3 simulate.py " + directOrGUI + " " + str(self.myID) + " 2&>1 &"
+        os.system(systemCommand)
 
-        file = open("fitness.txt", "r")
+    def Wait_For_Simulation_To_End(self):
+        fitnessFile = "fitness" + str(self.myID) + ".txt"
+        while not os.path.exists(fitnessFile):
+            time.sleep(0.01)
+
+        file = open(fitnessFile, "r")
         self.fitness = float(file.read())
         file.close()
+        # print(self.fitness)
+        os.system("rm " + fitnessFile)
+
+    def Set_ID(self, newID):
+        self.myID = newID
+
+    def Get_Fitness(self):
+        return self.fitness  
 
     def Mutate(self):
         row = random.randint(0,2)
         col = random.randint(0,1)
         self.weights[row, col] = random.random()*2-1
 
-    def Create_World(self):
-        pyrosim.Start_SDF("world.sdf")
-        pyrosim.Send_Cube(name="Box", pos=[2, 2, 0.5] , size=[1, 1, 1])
-        pyrosim.End()
+    # def Create_World(self):
+    #     pyrosim.Start_SDF("world.sdf")
+    #     pyrosim.Send_Cube(name="Box", pos=[2, 2, 0.5] , size=[1, 1, 1])
+    #     pyrosim.End()
 
     def Create_Robot(self):
         pyrosim.Start_URDF("body.urdf")
@@ -37,7 +52,7 @@ class SOLUTION:
         pyrosim.End()
     
     def Generate_Brain(self):
-        pyrosim.Start_NeuralNetwork("brain.nndf")
+        pyrosim.Start_NeuralNetwork("brain" + str(self.myID) + ".nndf")
 
         pyrosim.Send_Sensor_Neuron(name = 0 , linkName = "Torso")
         pyrosim.Send_Sensor_Neuron(name = 1 , linkName = "BackLeg")

@@ -15,3 +15,5 @@ targetAngles_back = amplitude_back * numpy.sin(10 * targetAngles + phaseOffset_b
 numberOfGenerations = 10
 
 sleep = 0.005
+
+populationSize = 10
