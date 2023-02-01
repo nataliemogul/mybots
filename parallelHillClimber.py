@@ -12,8 +12,8 @@ class PARALLEL_HILL_CLIMBER:
         self.parents = {}
         self.nextAvailableID = 0
 
-        pyrosim.Start_SDF("world.sdf")
-        pyrosim.End() 
+        SOLUTION.Create_World()
+        SOLUTION.Create_Robot()
 
         for i in range(constants.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -41,35 +41,35 @@ class PARALLEL_HILL_CLIMBER:
 
     def Spawn(self):
         self.children = {}
-        for index in self.parents:
-            self.children[index] = copy.deepcopy(self.parents[index])
-            self.children[index].Set_ID(self.nextAvailableID)
+        for parent in self.parents:
+            self.children[parent] = copy.deepcopy(self.parents[parent])
+            self.children[parent].Set_ID(self.nextAvailableID)
             self.nextAvailableID += 1
 
     def Mutate(self):
-        for childIndex in self.children:
-            self.children[childIndex].Mutate()
+        for child in self.children:
+            self.children[child].Mutate()
 
     def Select(self):
-        for key in self.children:
-            if self.parents[key].Get_Fitness() > self.children[key].Get_Fitness():
-                self.parents[key] = self.children[key]
+        for child in self.children:
+            if self.parents[child].Get_Fitness() > self.children[child].Get_Fitness():
+                self.parents[child] = self.children[child]
 
     def Print(self):
         print()
         for parent in self.parents:
-            print("Parent: ", self.parents[parent].Get_Fitness(), "| Child: ", self.children[parent].Get_Fitness())
+            print("Parent: ", self.parents[parent].Get_Fitness(), " Child: ", self.children[parent].Get_Fitness())
         print()
 
     def Show_Best(self):
         best_parent_key = "None"
         best_fitness = 1000000
-        for key in self.parents:
-            parent_fitness = self.parents[key].Get_Fitness()
+        for parent in self.parents:
+            parent_fitness = self.parents[parent].Get_Fitness()
             if parent_fitness < best_fitness:
                 best_fitness = parent_fitness
-                best_parent_key = key
+                best_parent = parent
 
-        self.parents[best_parent_key].Start_Simulation("GUI")
+        self.parents[best_parent].Start_Simulation("GUI")
         print("Best fitness: ", best_fitness)
 

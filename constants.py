@@ -13,7 +13,11 @@ targetAngles_front = amplitude_front/2 * numpy.sin(100 * targetAngles + phaseOff
 targetAngles_back = amplitude_back * numpy.sin(10 * targetAngles + phaseOffset_back)
 
 numberOfGenerations = 10
-
 sleep = 0.005
 
 populationSize = 10
+
+numSensorNeurons = 3
+numMotorNeurons = 2
+
+motorJointRange = 0.2
