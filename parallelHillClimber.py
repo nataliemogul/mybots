@@ -3,6 +3,7 @@ import copy
 import constants
 import pyrosim.pyrosim as pyrosim
 import os
+import random
 
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
@@ -12,8 +13,8 @@ class PARALLEL_HILL_CLIMBER:
         self.parents = {}
         self.nextAvailableID = 0
 
-        SOLUTION.Create_World()
-        SOLUTION.Create_Robot()
+        # SOLUTION.Create_World()
+        # SOLUTION.Create_Robot()
 
         for i in range(constants.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
@@ -52,7 +53,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Select(self):
         for child in self.children:
-            if self.parents[child].Get_Fitness() > self.children[child].Get_Fitness():
+            if self.parents[child].Get_Fitness() < self.children[child].Get_Fitness():
                 self.parents[child] = self.children[child]
 
     def Print(self):
@@ -62,14 +63,15 @@ class PARALLEL_HILL_CLIMBER:
         print()
 
     def Show_Best(self):
-        best_parent_key = "None"
-        best_fitness = 1000000
+        best_parent = "None"
+        best_fitness = -1000000
         for parent in self.parents:
             parent_fitness = self.parents[parent].Get_Fitness()
-            if parent_fitness < best_fitness:
+            if parent_fitness > best_fitness:
                 best_fitness = parent_fitness
                 best_parent = parent
 
         self.parents[best_parent].Start_Simulation("GUI")
+        self.parents[random.randint(0,len(self.parents)-1)].Start_Simulation("GUI")
         print("Best fitness: ", best_fitness)
 

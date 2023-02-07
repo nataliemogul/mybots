@@ -47,7 +47,12 @@ class SOLUTION:
     @staticmethod
     def Create_Robot():
         pyrosim.Start_URDF("body.urdf")
-        pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1] , size=[1, 1, 1])
+        pyrosim.Send_Cube(name="Torso", pos=[0, 0, 1] , size=[2, 1, 0.2])
+
+        pyrosim.Send_Joint(name = "Torso_Neck", parent= "Torso", child = "Neck", type = "revolute", position = [0, -0.5, 1], jointAxis="1 0 0")
+        pyrosim.Send_Cube(name="Neck", pos=[1, 0.5, 0.5] , size=[0.2, 0.2, 1])
+        pyrosim.Send_Joint(name = "Neck_Head", parent= "Neck", child = "Head", type = "revolute", position = [0, -1, 0], jointAxis="1 0 0")
+        pyrosim.Send_Cube(name="Head", pos=[1.2, 1.5, 1.2] , size=[0.5, 0.5, 0.5])
         
         pyrosim.Send_Joint(name = "Torso_BackLeg", parent= "Torso", child = "BackLeg", type = "revolute", position = [0, -0.5, 1], jointAxis="1 0 0")
         pyrosim.Send_Cube(name="BackLeg", pos=[0, -0.5, 0] , size=[0.2, 1, 0.2])
