@@ -21,3 +21,5 @@ numSensorNeurons = 3
 numMotorNeurons = 2
 
 motorJointRange = 0.2
+
+maxLinks = 10

@@ -72,6 +72,5 @@ class PARALLEL_HILL_CLIMBER:
                 best_parent = parent
 
         self.parents[best_parent].Start_Simulation("GUI")
-        self.parents[random.randint(0,len(self.parents)-1)].Start_Simulation("GUI")
         print("Best fitness: ", best_fitness)
 

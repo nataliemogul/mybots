@@ -38,12 +38,6 @@ class ROBOT:
                 desiredAngle = self.nn.Get_Value_Of(neuronName)*constants.motorJointRange
                 self.motors[jointName].Set_Value(desiredAngle, self.robotId)
 
-    # def Save_Values(self):
-    #     for sensor in self.sensors:
-    #         self.sensors[sensor].Save_Values()
-    #     for motor in self.motors:
-    #         self.motors[motor].Save_Values()
-
     def Think(self):
         self.nn.Update()
         #self.nn.Print()

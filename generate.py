@@ -15,11 +15,17 @@ def Create_World():
 
 def Create_Robot():
     pyrosim.Start_URDF("body.urdf")
-    pyrosim.Send_Cube(name="Torso", pos=[1.5,0,1.5] , size=[length, width, height])
-    pyrosim.Send_Joint(name = 'Torso_BackLeg', parent= "Torso", child = "BackLeg", type = "revolute", position = [1,0,1])
-    pyrosim.Send_Cube(name="BackLeg", pos=[-0.5,0,-0.5] , size=[length, width, height])
-    pyrosim.Send_Joint(name ="Torso_FrontLeg", parent= "Torso", child = "FrontLeg", type = "revolute", position = [2,0,1])
-    pyrosim.Send_Cube(name="FrontLeg", pos=[0.5,0,-0.5] , size=[length, width, height])
+    y_orientation=0
+    shape_length=0
+    randLinks= random.randint(2, 10)
+    
+    pyrosim.Send_Cube(name="Head" , pos=[0.5,0,0.5] , size=[0.02,0.5,0.2], rgb=[1,0,1])
+    # pyrosim.Start_URDF("body.urdf")
+    # pyrosim.Send_Cube(name="Torso", pos=[1.5,0,1.5] , size=[length, width, height])
+    # pyrosim.Send_Joint(name = 'Torso_BackLeg', parent= "Torso", child = "BackLeg", type = "revolute", position = [1,0,1])
+    # pyrosim.Send_Cube(name="BackLeg", pos=[-0.5,0,-0.5] , size=[length, width, height])
+    # pyrosim.Send_Joint(name ="Torso_FrontLeg", parent= "Torso", child = "FrontLeg", type = "revolute", position = [2,0,1])
+    # pyrosim.Send_Cube(name="FrontLeg", pos=[0.5,0,-0.5] , size=[length, width, height])
     pyrosim.End()
 
 def Generate_Brain():
@@ -44,4 +50,4 @@ def Generate_Brain():
 
 Create_World()
 Create_Robot()
-Generate_Brain()
+#Generate_Brain()
