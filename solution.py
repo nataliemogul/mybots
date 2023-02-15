@@ -48,13 +48,14 @@ class SOLUTION:
     def Create_Robot(self):
         pyrosim.Start_URDF("body.urdf")
 		
-        length=random.randint(1,2)
-        width=random.randint(1,2)
-        height=random.randint(1,2)
+        length=random.uniform(1,2)
+        width=random.uniform(1,2)
+        height=random.uniform(1,2)
         
         randLinks= random.randint(2,constants.maxLinks)
         
         self.links= [random.randint(0,1) for x in range (randLinks)]
+        print(self.links)
         
         if self.links[0]==0:
             color="Blue"
@@ -72,9 +73,9 @@ class SOLUTION:
         for i in range(1,randLinks):
             parentName="Link"+str(i)
             childName="Link"+str(i+1)
-            length=random.randint(1,3)
-            width=random.randint(1,2)
-            height=random.randint(1,2)
+            length=random.uniform(1,3)
+            width=random.uniform(1,2)
+            height=random.uniform(1,2)
 
             if self.links[i]==0:
                 color_name="Blue"
@@ -83,13 +84,13 @@ class SOLUTION:
                 color_name="Green"
                 rgb=[0,1,0]
 
-            pyrosim.Send_Cube(name=parentName, pos=[0,0,height/2], size=[length, width, height], color=color, rgb=rgb)
+            pyrosim.Send_Cube(name=parentName, pos=[0,0,height/2], size=[length, width, height], color=color_name, rgb=rgb)
             
             if i<randLinks-1:
                 jointName= parentName+'_'+childName
                 pyrosim.Send_Joint(name=jointName, parent=parentName, child=childName, type="revolute", position=[0,width/-1,0.5], jointAxis= "1 0 0")
                 self.joints.append(jointName)
-                
+
         pyrosim.End()
 
     def Generate_Brain(self):
@@ -112,5 +113,5 @@ class SOLUTION:
                 pyrosim.Send_Synapse(sourceNeuronName = currRow, 
 					targetNeuronName = currColumn + numSensors, 
 					weight = self.weights[currRow][currColumn] )
-                    
+
         pyrosim.End()

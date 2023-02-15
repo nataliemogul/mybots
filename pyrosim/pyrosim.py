@@ -129,7 +129,7 @@ def Send_Cube(name,pos, size, color, rgb):
     if filetype == SDF_FILETYPE:
 
         End_Model()
-    breakpoint()
+
     linkNamesToIndices[name] = availableLinkIndex
 
     availableLinkIndex = availableLinkIndex + 1
