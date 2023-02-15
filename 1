@@ -2,15 +2,15 @@ pybullet build time: Jan  8 2023 21:26:23
 Traceback (most recent call last):
   File "/Users/nataliemogul/Documents/GitHub/mybots/simulate.py", line 17, in <module>
     simulation.Run()
-  File "/Users/nataliemogul/Documents/GitHub/mybots/simulation.py", line 27, in Run
-    self.robot.Think()
-  File "/Users/nataliemogul/Documents/GitHub/mybots/robot.py", line 42, in Think
-    self.nn.Update()
-  File "/Users/nataliemogul/Documents/GitHub/mybots/pyrosim/neuralNetwork.py", line 36, in Update
-    self.neurons[neuronName].Update_Hidden_Or_Motor_Neuron(self.neurons, self.synapses)
-  File "/Users/nataliemogul/Documents/GitHub/mybots/pyrosim/neuron.py", line 69, in Update_Hidden_Or_Motor_Neuron
-    value = neurons[presynaptic].Get_Value()
-KeyError: '4'
-mogul/Documents/GitHub/mybots/pyrosim/pyrosim.py", line 49, in Get_Touch_Sensor_Value_For_Link
+  File "/Users/nataliemogul/Documents/GitHub/mybots/simulation.py", line 28, in Run
+    self.robot.Act()
+  File "/Users/nataliemogul/Documents/GitHub/mybots/robot.py", line 39, in Act
+    self.motors[jointName].Set_Value(desiredAngle, self.robotId)
+KeyError: 'Link2_Link3'
+alNetwork.py", line 34, in Update
+    self.neurons[neuronName].Update_Sensor_Neuron()
+  File "/Users/nataliemogul/Documents/GitHub/mybots/pyrosim/neuron.py", line 58, in Update_Sensor_Neuron
+    self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(self.Get_Link_Name()))
+  File "/Users/nataliemogul/Documents/GitHub/mybots/pyrosim/pyrosim.py", line 49, in Get_Touch_Sensor_Value_For_Link
     desiredLinkIndex = linkNamesToIndices[linkName]
-KeyError: 'Link5'
+KeyError: 'Link3'
