@@ -51,18 +51,34 @@ class SOLUTION:
         length=random.uniform(1,2)
         width=random.uniform(1,2)
         height=random.uniform(1,2)
+
+        prev_length = length
+        prev_width = width
+        prev_height = height
         
         randLinks= random.randint(2,constants.maxLinks)
         
+        self.directions= [0 for x in range(randLinks)]
+        self.directions[0] = 1
+        prev_dir = 1
+        for i in range(randLinks):
+            while self.directions[i] == 0 or (self.directions[i] == 1 and self.directions[i-1] == 2) or \
+            (self.directions[i] == 2 and self.directions[i-1] == 1) or (self.directions[i] == 3 and self.directions[i-1] == 4) or \
+            (self.directions[i] == 4 and self.directions[i-1] == 3) or (self.directions[i] == 5 and self.directions[i-1] == 6) or \
+            (self.directions[i] == 6 and self.directions[i-1] == 5):
+                self.directions[i]= random.randint(1,6)
+        print(self.directions)
         self.links= [random.randint(0,1) for x in range (randLinks)]
         print(self.links)
         
+        ######## handling colors
         if self.links[0]==0:
             color="Blue"
             rgb=[0,0,1]
         else:
             color="Green"
             rgb=[0,1,0]
+        ##########
 
         pyrosim.Send_Cube(name="Link0", pos=[0,0,height/2], size=[length, width, height], color=color, rgb=rgb)
 
@@ -84,11 +100,112 @@ class SOLUTION:
                 color_name="Green"
                 rgb=[0,1,0]
 
+            ######## handling direction
+            if self.directions[i] == 1: #x, pos
+                cube_position=[length/2, 0, 0]
+                if prev_dir == 1 or prev_dir == 2:
+                    joint_position=[length,0, 0]
+                elif prev_dir == 3: #y, pos
+                    joint_position = [prev_length/2, prev_width/2, 0]
+                elif prev_dir == 4: #y, neg
+                    joint_position = [prev_length/2, -prev_width/2, 0]
+                elif prev_dir == 5: #z, pos
+                    joint_position = [prev_length/2, 0, prev_height/2]
+                else: #z, neg
+                    joint_position = [prev_length/2, 0, -prev_height/2]
+
+                prev_dir = 1
+                joint_direction='1 0 0'
+
+            elif self.directions[i] == 2: #x, neg
+                cube_position=[-length/2, 0, 0]
+                if prev_dir == 1 or prev_dir == 2:
+                    joint_position=[-length,0, 0]
+                elif prev_dir == 3: #y, pos
+                    joint_position = [-prev_length/2, prev_width/2, 0]
+                elif prev_dir == 4: #y, neg
+                    joint_position = [-prev_length/2, -prev_width/2, 0]
+                elif prev_dir == 5: #z, pos
+                    joint_position = [-prev_length/2, 0, prev_height/2]
+                else: #z, neg
+                    joint_position = [-prev_length/2, 0, -prev_height/2]
+                prev_dir = 2
+                joint_direction='1 0 0'
+
+            elif self.directions[i] == 3: #y, pos
+                cube_position=[0, width/2,0]
+
+                if prev_dir == 3 or prev_dir == 4:
+                    joint_position=[0,prev_width, 0]
+                elif prev_dir == 1: #x, pos
+                    joint_position = [prev_length/2, prev_width/2, 0]
+                elif prev_dir == 2: #x, neg
+                    joint_position = [-prev_length/2, prev_width/2, 0]
+                elif prev_dir == 5: #z, pos
+                    joint_position = [0, prev_width/2, prev_height/2]
+                else: #z, neg
+                    joint_position = [0, prev_width/2, -prev_height/2]
+                prev_dir = 3
+                joint_direction='0 1 0'
+
+            elif self.directions[i] == 4: #y, neg
+                cube_position=[0, -width/2,0]
+                if prev_dir == 3 or prev_dir == 4:
+                    joint_position=[0,prev_width, 0]
+                elif prev_dir == 1: #x, pos
+                    joint_position = [-prev_length/2, prev_width/2, 0]
+                elif prev_dir == 2: #x, neg
+                    joint_position = [-prev_length/2, -prev_width/2, 0]
+                elif prev_dir == 5: #z, pos
+                    joint_position = [0, prev_width/2, prev_height/2]
+                else: #z, neg
+                    joint_position = [0, -prev_width/2, prev_height/2]
+                
+                prev_dir = 4
+                joint_direction='0 1 0'
+            elif self.directions[i] == 5: #z, pos
+                cube_position=[0, 0, height/2]
+                
+                if prev_dir == 5 or prev_dir == 6:
+                    joint_position=[0,0, prev_width]
+                elif prev_dir == 1: #x, pos
+                    joint_position = [prev_length/2, 0, prev_height/2]
+                elif prev_dir == 2: #x, neg
+                    joint_position = [-prev_length, 0, prev_height/2]
+                elif prev_dir == 3: #y, pos
+                    joint_position = [0, prev_width/2, prev_height/2]
+                else: #y, neg
+                    joint_position = [0, -prev_width/2, prev_height/2]
+
+                prev_dir = 5
+                joint_direction='1 0 0'
+
+            else:
+                cube_position=[0, 0, height/2]
+                
+                if prev_dir == 5 or prev_dir == 6:
+                    joint_position=[0,0, prev_width]
+                elif prev_dir == 1: #x, pos
+                    joint_position = [prev_length/2, 0, -prev_height/2]
+                elif prev_dir == 2: #x, neg
+                    joint_position = [-prev_length, 0, -prev_height/2]
+                elif prev_dir == 3: #y, pos
+                    joint_position = [0, -prev_width/2, -prev_height/2]
+                else: #y, neg
+                    joint_position = [0, prev_width/2, -prev_height/2]
+
+                prev_dir = 6
+                joint_direction='1 0 0'
+
+            prev_length = length
+            prev_width = width
+            prev_height = height
+
             pyrosim.Send_Cube(name=parentName, pos=[0,0,height/2], size=[length, width, height], color=color_name, rgb=rgb)
             
             if i<randLinks-1:
                 jointName= parentName+'_'+childName
-                pyrosim.Send_Joint(name=jointName, parent=parentName, child=childName, type="revolute", position=[0,width/-1,0.5], jointAxis= "1 0 0")
+                pyrosim.Send_Joint(name=jointName, parent=parentName, child=childName, type="revolute", position=joint_position, jointAxis= joint_direction)
                 self.joints.append(jointName)
 
         pyrosim.End()
