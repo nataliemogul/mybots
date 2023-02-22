@@ -81,8 +81,8 @@ class SOLUTION:
         ##########
 
         pyrosim.Send_Cube(name="Link0", pos=[0,0,height/2], size=[length, width, height], color=color, rgb=rgb)
-
-        pyrosim.Send_Joint(name="Link0_Link1", parent="Link0", child="Link1", type="revolute", position=[0,width/-2,0.5], jointAxis= "1 0 0")		
+        print([0,0,height/2], [0,-width/2,0.5])
+        pyrosim.Send_Joint(name="Link0_Link1", parent="Link0", child="Link1", type="revolute", position=[0,-width/2,0.5], jointAxis= "1 0 0")		
         
         self.joints.append("Link0_Link1")
         
@@ -151,7 +151,7 @@ class SOLUTION:
             elif self.directions[i] == 4: #y, neg
                 cube_position=[0, -width/2,0]
                 if prev_dir == 3 or prev_dir == 4:
-                    joint_position=[0,prev_width, 0]
+                    joint_position=[0,-prev_width, 0]
                 elif prev_dir == 1: #x, pos
                     joint_position = [-prev_length/2, prev_width/2, 0]
                 elif prev_dir == 2: #x, neg
@@ -181,10 +181,10 @@ class SOLUTION:
                 joint_direction='1 0 0'
 
             else:
-                cube_position=[0, 0, height/2]
+                cube_position=[0, 0, -height/2]
                 
                 if prev_dir == 5 or prev_dir == 6:
-                    joint_position=[0,0, prev_width]
+                    joint_position=[0,0, -prev_height]
                 elif prev_dir == 1: #x, pos
                     joint_position = [prev_length/2, 0, -prev_height/2]
                 elif prev_dir == 2: #x, neg
@@ -196,13 +196,19 @@ class SOLUTION:
 
                 prev_dir = 6
                 joint_direction='1 0 0'
+            
+            if i < 3:
+                print("cube position", cube_position, "joint", joint_position)
+                #print(prev_length, prev_width, prev_height)
 
             prev_length = length
             prev_width = width
             prev_height = height
 
-            pyrosim.Send_Cube(name=parentName, pos=[0,0,height/2], size=[length, width, height], color=color_name, rgb=rgb)
+            pyrosim.Send_Cube(name=parentName, pos=cube_position, size=[length, width, height], color=color_name, rgb=rgb)
             
+                
+
             if i<randLinks-1:
                 jointName= parentName+'_'+childName
                 pyrosim.Send_Joint(name=jointName, parent=parentName, child=childName, type="revolute", position=joint_position, jointAxis= joint_direction)
