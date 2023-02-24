@@ -6,7 +6,7 @@ For the brain" motor and sensor neurons are assigned randomly and there is no de
 
 A diagram of how the body contructs itself can be seen here:
 
-![IMG_3298](https://user-images.githubusercontent.com/114442449/221060016-64454da9-4d3d-4a75-bb23-63adcd03f9b1.jpg)
+\includegraphics[]{../../../Desktop/IMG_3298.jpg}
 
 
 To play use the python search.py command.
