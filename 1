@@ -7,6 +7,16 @@ startThreads creating 1 threads.
 starting thread 0
 started thread 0 
 MotionThreadFunc thread started
+Traceback (most recent call last):
+  File "/Users/nataliemogul/Documents/GitHub/mybots/simulate.py", line 17, in <module>
+    simulation.Run()
+  File "/Users/nataliemogul/Documents/GitHub/mybots/simulation.py", line 27, in Run
+    self.robot.Sense(i)
+  File "/Users/nataliemogul/Documents/GitHub/mybots/robot.py", line 27, in Sense
+    self.sensors[sensor].Get_Value(i)
+  File "/Users/nataliemogul/Documents/GitHub/mybots/sensor.py", line 10, in Get_Value
+    self.values[i] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+IndexError: index 1000 is out of bounds for axis 0 with size 1000
 numActiveThreads = 0
 stopping threads
 Thread with taskId 0 exiting
