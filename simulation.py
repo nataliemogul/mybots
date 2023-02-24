@@ -16,7 +16,7 @@ class SIMULATION:
             self.physicsClient = p.connect(p.DIRECT)
         else:
             self.physicsClient = p.connect(p.GUI)
-            #p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI,0)
         self.world = WORLD()
         self.robot = ROBOT(solutionID)
         p.setGravity(0,0,-9.8)
