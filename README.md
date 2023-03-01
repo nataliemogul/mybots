@@ -1,12 +1,13 @@
 # mybots
 
-Generating the body includes a starter cube with a randomized size. Then, a direction will randomly be chosen (x,y,z) for another cube to "grow from" the original cube. This cube will be a different randomized size. This process will be repeated a random n number of times.
-
-For the brain" motor and sensor neurons are assigned randomly and there is no defined fitness function currently.
-
-A diagram of how the body contructs itself can be seen here:
+This program generates a 3D snake with a random amount of links each with random dimensions. Links with sensors are green and links without sensors are blue. Each link is randomly in either the x, y, or z direction. A visual can be seen here:
 
 <img width="573" alt="Screenshot 2023-02-23 at 6 14 40 PM" src="https://user-images.githubusercontent.com/114442449/221060451-4109c0ea-9a85-4185-9de9-cda1e17ad9b7.png">
 
+For the brain, motor and sensor neurons are assigned randomly
 
-To play use the python search.py command.
+There were mutations added for this assignment. With a probability of 0.25, another link would be added to the child. This was made possible by creating a dictionary that saved all values for cubes and joints of a parent. If a mutation in the parent increased the fitness in the child, the child would replace the parent.
+
+Run search.py to generate a random snake.
+
+Run plot.py to generate a fitness plot.
