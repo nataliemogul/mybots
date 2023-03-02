@@ -12,6 +12,7 @@ Run search.py to generate a random snake.
 
 Run plot.py to generate a fitness plot.
 
+(I did not get my evolution code completely working yet!!!!)
 
 Sources:
 Evolving Virtual Creatures by Karl Sims (https://www.karlsims.com/papers/siggraph94.pdf)
