@@ -11,3 +11,8 @@ There were mutations added for this assignment. With a probability of 0.25, anot
 Run search.py to generate a random snake.
 
 Run plot.py to generate a fitness plot.
+
+
+Sources:
+Evolving Virtual Creatures by Karl Sims (https://www.karlsims.com/papers/siggraph94.pdf)
+Ludobots MOOC on Reddit (https://www.reddit.com/r/ludobots/)
