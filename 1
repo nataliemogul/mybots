@@ -8,15 +8,15 @@ starting thread 0
 started thread 0 
 MotionThreadFunc thread started
 Traceback (most recent call last):
-  File "/Users/nataliemogul/Documents/GitHub/mybots/simulate.py", line 17, in <module>
-    simulation.Run()
-  File "/Users/nataliemogul/Documents/GitHub/mybots/simulation.py", line 27, in Run
-    self.robot.Sense(i)
-  File "/Users/nataliemogul/Documents/GitHub/mybots/robot.py", line 27, in Sense
-    self.sensors[sensor].Get_Value(i)
-  File "/Users/nataliemogul/Documents/GitHub/mybots/sensor.py", line 10, in Get_Value
-    self.values[i] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
-IndexError: index 1000 is out of bounds for axis 0 with size 1000
+  File "/Users/nataliemogul/Documents/GitHub/mybots/simulate.py", line 16, in <module>
+    simulation = SIMULATION(directOrGUI, solutionID)
+  File "/Users/nataliemogul/Documents/GitHub/mybots/simulation.py", line 21, in __init__
+    self.robot = ROBOT(solutionID)
+  File "/Users/nataliemogul/Documents/GitHub/mybots/robot.py", line 18, in __init__
+    self.nn = NEURAL_NETWORK(brainFile)
+  File "/Users/nataliemogul/Documents/GitHub/mybots/pyrosim/neuralNetwork.py", line 13, in __init__
+    f = open(nndfFileName,"r")
+FileNotFoundError: [Errno 2] No such file or directory: 'brain3.nndf'
 numActiveThreads = 0
 stopping threads
 Thread with taskId 0 exiting
