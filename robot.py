@@ -8,6 +8,7 @@ import constants
 
 class ROBOT:
     def __init__(self, solutionID):
+        print("starting robot: ", solutionID)
         # self.robotId = p.loadURDF("body.urdf")
         self.solutionID = solutionID
         self.robotId = p.loadURDF("body" + str(self.solutionID) + ".urdf")
@@ -16,7 +17,8 @@ class ROBOT:
         self.Prepare_To_Act()
         brainFile = "brain" + str(self.solutionID) + ".nndf"
         self.nn = NEURAL_NETWORK(brainFile)
-        os.system("rm " + brainFile)
+        
+        #os.system("rm " + brainFile)
         # os.system('rm body' + str(self.solutionID) + '.urdf')
 
     def Prepare_To_Sense(self):
@@ -41,6 +43,7 @@ class ROBOT:
                 self.motors[jointName].Set_Value(desiredAngle, self.robotId)
 
     def Think(self):
+        print("thinking for robot ", self.solutionID)
         self.nn.Update()
         #self.nn.Print()
 
@@ -54,3 +57,4 @@ class ROBOT:
         f.write(str(xPosition))
         f.close()
         os.system("mv " + tmpFile + " " + fitnessFile)
+        print("done with creating fitnessfile: ", self.solutionID)

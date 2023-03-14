@@ -13,6 +13,7 @@ import sys
 directOrGUI = sys.argv[1]
 solutionID = sys.argv[2]
 
+print("simulation.py -> ", solutionID)
 simulation = SIMULATION(directOrGUI, solutionID)
 simulation.Run()
 simulation.Get_Fitness()

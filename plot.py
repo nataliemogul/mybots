@@ -5,7 +5,7 @@ from parallelHillClimber import PARALLEL_HILL_CLIMBER
 import constants as c
 import random 
 
-for i in range(5):
+for i in range(10):
     random.seed(i + 1) # picks one set of random numbers
     phc = PARALLEL_HILL_CLIMBER()
     fitnessArray = phc.Evolve()

@@ -16,15 +16,12 @@ class PARALLEL_HILL_CLIMBER:
 
         self.fitnessArray = []
 
-        # SOLUTION.Create_World()
-        # SOLUTION.Create_Robot()
-
         for i in range(constants.populationSize):
             self.parents[i] = SOLUTION(self.nextAvailableID)
             self.nextAvailableID += 1
 
-        testRun = SOLUTION(self.nextAvailableID)
-        testRun.Start_Simulation("GUI")
+        # testRun = SOLUTION(self.nextAvailableID)
+        # testRun.Start_Simulation("GUI")
 
     def Evolve(self):
         self.Evaluate(self.parents)
@@ -47,7 +44,7 @@ class PARALLEL_HILL_CLIMBER:
 
         for solution in solutions:
             solutions[solution].Wait_For_Simulation_To_End()
-
+        
     def Spawn(self):
         self.children = {}
         for parent in self.parents:
@@ -63,6 +60,9 @@ class PARALLEL_HILL_CLIMBER:
         currArray = []
         for child in self.children:
             if self.parents[child].Get_Fitness() < self.children[child].Get_Fitness():
+                brainFile = "brain" + str(self.parents[child].myID) + ".nndf"
+                os.system("rm " + brainFile)
+
                 self.parents[child] = self.children[child]
             currArray.append(self.parents[child].Get_Fitness())
         self.fitnessArray.append(max(currArray))
@@ -85,4 +85,3 @@ class PARALLEL_HILL_CLIMBER:
 
         self.parents[best_parent].Start_Simulation("GUI")
         print("Best fitness: ", best_fitness)
-
