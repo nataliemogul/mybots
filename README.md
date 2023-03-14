@@ -14,6 +14,11 @@ Clearly my results were doing what I wanted them to based on the graph seen in F
 
 <img width="642" alt="FINAL PROJECT" src="https://user-images.githubusercontent.com/114442449/225150777-919212f6-398d-4228-ae5b-aba8f6bda524.png">
 
+**GIF**
+
+https://user-images.githubusercontent.com/114442449/225151925-f711b34f-27a3-49fc-b1d2-a7e3eb9a2a7a.mov
+
+
 Sources:
 Evolving Virtual Creatures by Karl Sims (https://www.karlsims.com/papers/siggraph94.pdf)
 Ludobots MOOC on Reddit (https://www.reddit.com/r/ludobots/)
