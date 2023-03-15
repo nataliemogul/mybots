@@ -25,3 +25,7 @@ https://youtu.be/egaZslYeyEA
 **Sources:**
 Evolving Virtual Creatures by Karl Sims (https://www.karlsims.com/papers/siggraph94.pdf)
 Ludobots MOOC on Reddit (https://www.reddit.com/r/ludobots/)
+
+**Thank Yous**
+
+A big shout out to Donna for being really patient with me and sitting with me to help me debug anf get my evolution to work.  
